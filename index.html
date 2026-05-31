@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Aldra · AI Well-being</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-bg" aria-hidden="true"></div>
+
+    <div class="device-frame">
+    <main class="phone" role="application" aria-label="AI 身心健康助手">
+      <!-- Screen 1: Home — 深色简洁（默认首屏） -->
+      <section
+        id="screen-home"
+        class="screen screen--home screen--active"
+        data-screen="home"
+        data-home-theme="night"
+        data-home-season="summer"
+      >
+        <div class="home-minimal" aria-label="首页">
+          <div class="status-bar" aria-hidden="true">
+            <time class="status-bar__time" id="status-time">9:41</time>
+            <span class="status-bar__island"></span>
+            <span class="status-bar__sys">
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true">
+                <path
+                  d="M1 9V7h2v2H1zm4 2V5h2v6H5zm4 2V3h2v10H9zm4 2V1h2v12h-2z"
+                  fill="currentColor"
+                  opacity="0.9"
+                />
+              </svg>
+              <svg width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true">
+                <rect x="0.5" y="1" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1" opacity="0.85" />
+                <rect x="2" y="3" width="4" height="7" rx="0.5" fill="currentColor" opacity="0.9" />
+              </svg>
+            </span>
+          </div>
+
+          <header class="home-minimal__toolbar">
+            <button type="button" id="btn-toolbar-garden" class="streak-pill streak-pill--btn" aria-label="打开花园视频" title="花园视频">
+              <svg class="streak-pill__garden" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <ellipse cx="12" cy="21.2" rx="7.5" ry="1.4" opacity="0.28" />
+                <rect x="11" y="11.5" width="2" height="9" rx="1" opacity="0.92" />
+                <circle cx="12" cy="7.8" r="3.6" opacity="0.96" />
+                <circle cx="7.2" cy="9.6" r="2.7" opacity="0.88" />
+                <circle cx="16.8" cy="9.2" r="2.5" opacity="0.88" />
+                <ellipse cx="9.2" cy="14.2" rx="2.2" ry="1.1" transform="rotate(-38 9.2 14.2)" opacity="0.45" />
+                <ellipse cx="14.8" cy="13.8" rx="2.2" ry="1.1" transform="rotate(38 14.8 13.8)" opacity="0.45" />
+              </svg>
+            </button>
+            <div class="home-toolbar__end">
+              <button
+                type="button"
+                id="btn-home-season"
+                class="toolbar-icon-btn toolbar-icon-btn--season"
+                aria-label="Cycle season landscape"
+                title="Season: Spring / Summer / Autumn / Winter"
+              >
+                Summer
+              </button>
+              <span class="toolbar-daynight-wrap">
+                <button
+                  type="button"
+                  id="btn-home-daynight"
+                  class="toolbar-icon-btn toolbar-icon-btn--daynight"
+                  aria-label="切换为白天模式"
+                  title="白天 / 夜晚"
+                >
+                  <svg
+                    class="toolbar-icon-btn__icon toolbar-icon-btn__sun"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="4" fill="currentColor" />
+                    <path
+                      d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <svg class="toolbar-icon-btn__icon toolbar-icon-btn__moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 8.5 8.5 0 1 0 21 14.5z" />
+                  </svg>
+                </button>
+              </span>
+              <button type="button" class="avatar avatar--home avatar--home-btn" id="btn-home-avatar-mood" aria-label="Mood tracking and summary">
+                S
+              </button>
+            </div>
+          </header>
+
+          <div class="home-minimal__hero">
+            <div class="hero-mascot">
+              <span class="hero-mascot__glow" aria-hidden="true"></span>
+              <span class="hero-mascot__ring" aria-hidden="true"></span>
+              <video
+                class="hero-mascot__video"
+                autoplay
+                muted
+                loop
+                playsinline
+                disablepictureinpicture
+                aria-label="小狗形象"
+              >
+                <source src="media/dog.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <h1 class="home-minimal__welcome">Welcome, Sherry</h1>
+          </div>
+
+          <div class="home-minimal__footer">
+            <div class="home-chat-row">
+              <button type="button" id="btn-home-call" class="home-chat-bar__call" aria-label="电话" title="电话">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  />
+                </svg>
+              </button>
+              <div class="home-chat-bar">
+                <label class="home-chat-bar__field">
+                  <span class="visually-hidden">Message</span>
+                  <input
+                    type="text"
+                    class="home-chat-bar__input"
+                    placeholder="Your message"
+                    autocomplete="off"
+                    inputmode="text"
+                  />
+                </label>
+                <button type="button" class="home-chat-bar__voice" data-open-chat aria-label="语音输入" title="语音">
+                  <svg class="home-chat-bar__mic" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path
+                      d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V20H9v2h6v-2h-2v-2.08A7 7 0 0 0 19 11h-2z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <nav class="home-tabbar" aria-label="主导航">
+              <button type="button" class="home-tab home-tab--active" id="btn-home-tab-1" aria-label="首页" title="首页">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M4 10v4h3l5 4V6L7 10H4zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z" />
+                </svg>
+              </button>
+              <button type="button" class="home-tab" id="btn-home-tab-2" aria-label="日记" title="日记">
+                <svg class="home-tab__pen" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.11c-.1.1-.15.22-.15.36zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                  />
+                </svg>
+              </button>
+              <button type="button" class="home-tab" id="btn-home-tab-garden" aria-label="花园视频" title="花园视频">
+                <svg class="home-tab__garden" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <ellipse cx="12" cy="21.2" rx="7.5" ry="1.4" opacity="0.28" />
+                  <rect x="11" y="11.5" width="2" height="9" rx="1" opacity="0.92" />
+                  <circle cx="12" cy="7.8" r="3.6" opacity="0.96" />
+                  <circle cx="7.2" cy="9.6" r="2.7" opacity="0.88" />
+                  <circle cx="16.8" cy="9.2" r="2.5" opacity="0.88" />
+                  <ellipse cx="9.2" cy="14.2" rx="2.2" ry="1.1" transform="rotate(-38 9.2 14.2)" opacity="0.45" />
+                  <ellipse cx="14.8" cy="13.8" rx="2.2" ry="1.1" transform="rotate(38 14.8 13.8)" opacity="0.45" />
+                </svg>
+              </button>
+              <button type="button" class="home-tab" id="btn-home-tab-course" aria-label="Mood tracking and summary" title="Mood &amp; Summary">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M5 6.5L12 4l7 2.5V17l-7 2.5L5 17V6.5zM12 6.2L7.5 7.7V15l4.5 1.6 4.5-1.6V7.7L12 6.2z" />
+                </svg>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- 情绪：追踪 + 摘要（首页 S / 第四 Tab 进入） -->
+      <section
+        id="screen-mood"
+        class="screen screen--mood"
+        data-screen="mood"
+        hidden
+        data-home-theme="night"
+        data-home-season="summer"
+      >
+        <div class="mood-shell">
+          <header class="mood-top">
+            <button type="button" class="mood-top__back" id="btn-mood-back" aria-label="返回首页">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <h1 class="mood-top__title">Mood</h1>
+            <button type="button" class="mood-top__weeks" id="btn-mood-weeks" aria-label="Time range" aria-haspopup="listbox" aria-expanded="false">
+              Weeks
+              <svg class="mood-top__weeks-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+          </header>
+
+          <div class="mood-seg" role="tablist" aria-label="Mood views">
+            <button
+              type="button"
+              role="tab"
+              id="mood-tab-tracking"
+              class="mood-seg__btn mood-seg__btn--active"
+              aria-selected="true"
+              aria-controls="mood-panel-tracking"
+            >
+              Mood Tracking
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="mood-tab-summary"
+              class="mood-seg__btn"
+              aria-selected="false"
+              aria-controls="mood-panel-summary"
+            >
+              Summary
+            </button>
+          </div>
+
+          <div class="mood-panels">
+            <div id="mood-panel-tracking" role="tabpanel" class="mood-panel mood-panel--tracking" aria-labelledby="mood-tab-tracking">
+              <div class="mood-panel__inner mood-panel__inner--tracking">
+                <article class="mood-cal-card">
+                  <header class="mood-cal-card__head">
+                    <div class="mood-cal-card__titles">
+                      <h2 class="mood-cal-card__title">Mood Calendar</h2>
+                      <p class="mood-cal-card__sub">Collected from app openings and mood check-in’s</p>
+                    </div>
+                    <button type="button" class="mood-icon-more" aria-label="Mood Calendar options">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <circle cx="5" cy="12" r="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <circle cx="19" cy="12" r="2" />
+                      </svg>
+                    </button>
+                  </header>
+                  <div class="mood-cal-card__week" role="list" aria-label="This week">
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">S</span>
+                    </div>
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">M</span>
+                    </div>
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">T</span>
+                    </div>
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">W</span>
+                    </div>
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">T</span>
+                    </div>
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">F</span>
+                    </div>
+                    <div class="mood-cal-dow" role="listitem">
+                      <span class="mood-cal-dow__dot" aria-hidden="true"></span>
+                      <span class="mood-cal-dow__letter">S</span>
+                    </div>
+                  </div>
+                  <div class="mood-cal-card__rule" aria-hidden="true"></div>
+                  <footer class="mood-cal-card__foot">
+                    <button type="button" class="mood-cal-card__all">
+                      View All Days
+                      <svg class="mood-cal-card__all-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
+                  </footer>
+                </article>
+
+                <article class="mood-mod-card">
+                  <header class="mood-mod-card__head">
+                    <div class="mood-mod-card__titles">
+                      <h2 class="mood-mod-card__title">Your top emotions this week</h2>
+                      <p class="mood-mod-card__sub">Based on your evening reflections and mood check-ins.</p>
+                    </div>
+                    <button type="button" class="mood-icon-more" aria-label="Top emotions options">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <circle cx="5" cy="12" r="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <circle cx="19" cy="12" r="2" />
+                      </svg>
+                    </button>
+                  </header>
+                  <div class="mood-mod-card__body mood-mod-card__body--split">
+                    <div class="mood-donut" aria-hidden="true">
+                      <div class="mood-donut__ring"></div>
+                    </div>
+                    <div class="mood-empty-block">
+                      <p class="mood-empty-block__line">
+                        <span class="mood-empty-block__dot" aria-hidden="true"></span>
+                        No data yet
+                      </p>
+                      <p class="mood-empty-block__hint">Complete your evening reflections and mood check-ins to understand your emotions.</p>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="mood-mod-card">
+                  <header class="mood-mod-card__head mood-mod-card__head--compact">
+                    <h2 class="mood-mod-card__title mood-mod-card__title--solo">What makes you shine</h2>
+                    <button type="button" class="mood-icon-more" aria-label="What makes you shine options">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <circle cx="5" cy="12" r="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <circle cx="19" cy="12" r="2" />
+                      </svg>
+                    </button>
+                  </header>
+                  <div class="mood-mod-card__body mood-mod-card__body--center">
+                    <p class="mood-empty-block__line mood-empty-block__line--solo">No data yet</p>
+                    <p class="mood-empty-block__hint">Complete your evening reflection or mood check-in.</p>
+                  </div>
+                </article>
+
+                <article class="mood-mod-card">
+                  <header class="mood-mod-card__head mood-mod-card__head--compact">
+                    <h2 class="mood-mod-card__title mood-mod-card__title--solo">What makes you down</h2>
+                    <button type="button" class="mood-icon-more" aria-label="What makes you down options">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <circle cx="5" cy="12" r="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <circle cx="19" cy="12" r="2" />
+                      </svg>
+                    </button>
+                  </header>
+                  <div class="mood-mod-card__body mood-mod-card__body--center">
+                    <p class="mood-empty-block__line mood-empty-block__line--solo">No data yet</p>
+                    <p class="mood-empty-block__hint">Complete your evening reflection or mood check-in.</p>
+                  </div>
+                </article>
+
+                <nav class="mood-week-pill" aria-label="Week range">
+                  <button type="button" class="mood-week-pill__nav" aria-label="Previous week">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <div class="mood-week-pill__text">
+                    <span class="mood-week-pill__range">Jan 18 – Jan 24</span>
+                    <span class="mood-week-pill__label">This week</span>
+                  </div>
+                  <button type="button" class="mood-week-pill__nav" aria-label="Next week">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                </nav>
+              </div>
+            </div>
+            <div
+              id="mood-panel-summary"
+              role="tabpanel"
+              class="mood-panel"
+              aria-labelledby="mood-tab-summary"
+              hidden
+            >
+              <div class="mood-panel__inner">
+                <p class="mood-hint">Patterns and highlights from your entries — placeholder.</p>
+                <div class="mood-summary-card">
+                  <h2 class="mood-summary-card__title">Last 30 days</h2>
+                  <div class="mood-summary-chart" aria-hidden="true">
+                    <div class="mood-summary-chart__bar" style="--h: 42%"></div>
+                    <div class="mood-summary-chart__bar" style="--h: 58%"></div>
+                    <div class="mood-summary-chart__bar" style="--h: 35%"></div>
+                    <div class="mood-summary-chart__bar" style="--h: 71%"></div>
+                    <div class="mood-summary-chart__bar" style="--h: 48%"></div>
+                    <div class="mood-summary-chart__bar" style="--h: 62%"></div>
+                    <div class="mood-summary-chart__bar" style="--h: 55%"></div>
+                  </div>
+                  <ul class="mood-summary-list">
+                    <li><strong>Most common:</strong> Steady / OK</li>
+                    <li><strong>Noticed:</strong> Better evenings after short walks</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 日记：参考 Start writing 灰底大标题；昼夜/四季与首页同步 -->
+      <section
+        id="screen-diary"
+        class="screen screen--diary"
+        data-screen="diary"
+        hidden
+        data-home-theme="night"
+        data-home-season="summer"
+      >
+        <div class="diary-shell">
+          <header class="diary-toolbar">
+            <button type="button" class="diary-toolbar__btn" data-nav="home" aria-label="返回首页">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="diary-toolbar__btn"
+              aria-label="Journaling Suggestions"
+              data-tip="Journaling Suggestions"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 4V2" />
+                <path d="M15 16v-2" />
+                <path d="M8 9h2" />
+                <path d="M20 9h2" />
+                <path d="m17.8 11.8 1.2 1.2" />
+                <path d="m17.8 6.2 1.2-1.2" />
+                <path d="M3 21l9-9" />
+              </svg>
+            </button>
+            <button type="button" class="diary-toolbar__btn" aria-label="Mood Check-in" data-tip="Mood Check-in">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                <circle cx="9" cy="9" r="1" fill="currentColor" stroke="none" />
+                <circle cx="15" cy="9" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="diary-toolbar__btn"
+              id="btn-diary-perspective"
+              aria-label="Perspective and observation"
+              data-tip="Perspective and observation"
+              aria-expanded="false"
+              aria-controls="diary-summary-sheet"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+            <span class="diary-toolbar__spacer" aria-hidden="true"></span>
+            <button type="button" class="diary-ai-pill" data-nav="insights" aria-label="My Insights">
+              My Insights
+            </button>
+          </header>
+
+          <div class="diary-canvas">
+            <label class="visually-hidden" for="diary-editor">日记正文</label>
+            <textarea
+              id="diary-editor"
+              class="diary-editor"
+              name="diary"
+              rows="12"
+              placeholder="Start writing..."
+              spellcheck="true"
+              autocomplete="off"
+            ></textarea>
+          </div>
+
+          <div id="diary-float-actions" class="diary-float-actions" aria-label="Journal templates">
+            <button type="button" class="diary-float-btn" aria-label="Create Custom Template">
+              <svg class="diary-float-btn__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18.5 5.5c.8-.8 2.1-.8 2.8 0s.8 2 0 2.8l-8.8 8.8L8 20l1.4-3.9 9-9.6z" />
+                <path d="M5 21h.5c1.2 0 2.2-1 2.2-2.2v-.3" />
+              </svg>
+              <span class="diary-float-btn__label">Create Custom Template</span>
+            </button>
+            <button type="button" class="diary-float-btn" aria-label="Add from Library">
+              <svg class="diary-float-btn__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              <span class="diary-float-btn__label">Add from Library</span>
+            </button>
+          </div>
+
+          <div
+            id="diary-summary-sheet"
+            class="diary-summary-sheet"
+            aria-hidden="true"
+            role="region"
+            aria-label="Today's Reflection"
+          >
+            <div class="diary-summary-sheet__backdrop" aria-hidden="true"></div>
+            <div class="diary-summary-sheet__panel">
+              <div class="diary-summary-sheet__grab" aria-hidden="true"></div>
+              <header class="diary-summary-sheet__head">
+                <h2 class="diary-summary-sheet__title">Today's Reflection</h2>
+                <button type="button" class="diary-summary-sheet__close" id="btn-diary-summary-close" aria-label="Close">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
+              </header>
+              <div class="diary-summary-sheet__body">
+                <p class="diary-summary-sheet__text">
+                  You touched on work stress and a small win this afternoon. Underneath, there’s a wish for steadier pace and kinder self-talk — worth carrying into tomorrow.
+                </p>
+                <p class="diary-summary-sheet__meta">Perspective note · for today</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- My Insights：Journey 式日记预览卡片 -->
+      <section
+        id="screen-insights"
+        class="screen screen--insights"
+        data-screen="insights"
+        hidden
+        data-home-theme="night"
+        data-home-season="summer"
+      >
+        <div class="insights-shell">
+          <header class="insights-top">
+            <button type="button" class="insights-top__back" data-nav="diary" aria-label="返回日记">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <h1 class="insights-top__title">My Insights</h1>
+            <button type="button" class="insights-top__more" aria-label="更多">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="5" cy="12" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="19" cy="12" r="2" />
+              </svg>
+            </button>
+          </header>
+
+          <div class="insights-body">
+            <article class="insights-summary" aria-label="概览">
+              <h2 class="insights-summary__heading">Insights</h2>
+              <div class="insights-summary__grid">
+                <div class="insights-summary__main">
+                  <span class="insights-summary__num">3</span>
+                  <span class="insights-summary__label">Entries this year</span>
+                </div>
+                <ul class="insights-summary__stats">
+                  <li class="insights-summary__stat">
+                    <span class="insights-summary__stat-icon" aria-hidden="true">📅</span>
+                    <span>13 days journaled</span>
+                  </li>
+                  <li class="insights-summary__stat">
+                    <span class="insights-summary__stat-icon" aria-hidden="true">❝</span>
+                    <span>1,737 words all time</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <h2 class="insights-feed-title">Your journeys</h2>
+            <div class="insights-feed" role="list">
+              <article class="journey-card" role="listitem" tabindex="0">
+                <div class="journey-card__media journey-card__media--a" aria-hidden="true"></div>
+                <div class="journey-card__meta">
+                  <time class="journey-card__date" datetime="2026-04-02">Apr 2, 2026</time>
+                  <h3 class="journey-card__title">After the rain</h3>
+                  <p class="journey-card__excerpt">Walked without headphones. Noticed how quiet the street sounds when the world is still wet.</p>
+                </div>
+              </article>
+              <article class="journey-card" role="listitem" tabindex="0">
+                <div class="journey-card__media journey-card__media--b" aria-hidden="true"></div>
+                <div class="journey-card__meta">
+                  <time class="journey-card__date" datetime="2026-03-28">Mar 28, 2026</time>
+                  <h3 class="journey-card__title">Small wins</h3>
+                  <p class="journey-card__excerpt">Finished the draft I kept postponing. Celebrated with tea and ten minutes of nothing.</p>
+                </div>
+              </article>
+              <article class="journey-card" role="listitem" tabindex="0">
+                <div class="journey-card__media journey-card__media--c" aria-hidden="true"></div>
+                <div class="journey-card__meta">
+                  <time class="journey-card__date" datetime="2026-03-19">Mar 19, 2026</time>
+                  <h3 class="journey-card__title">Letter I won’t send</h3>
+                  <p class="journey-card__excerpt">Wrote it anyway. Felt lighter folding the page and putting it in a drawer.</p>
+                </div>
+              </article>
+              <article class="journey-card" role="listitem" tabindex="0">
+                <div class="journey-card__media journey-card__media--d" aria-hidden="true"></div>
+                <div class="journey-card__meta">
+                  <time class="journey-card__date" datetime="2026-03-08">Mar 8, 2026</time>
+                  <h3 class="journey-card__title">Sunday slow</h3>
+                  <p class="journey-card__excerpt">No plans. Sun through the blinds. Remembered that rest is also productive.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 2: Welcome -->
+      <section id="screen-welcome" class="screen" data-screen="welcome" hidden>
+        <header class="top-bar top-bar--welcome">
+          <span class="brand">
+            <span class="brand__sparkle" aria-hidden="true">✦</span>
+            Aldra
+          </span>
+        </header>
+
+        <div class="welcome-hero">
+          <div class="speech-bubble" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <div class="mascot" role="img" aria-label="友善的 AI 伙伴形象">
+            <div class="mascot__body">
+              <div class="mascot__face">
+                <span class="mascot__eye"></span>
+                <span class="mascot__eye"></span>
+                <span class="mascot__smile"></span>
+              </div>
+            </div>
+          </div>
+          <h1 class="tagline">
+            你的 AI 身心伙伴<br />
+            <span class="tagline__accent">随时倾听 · 温柔回应</span>
+          </h1>
+          <p class="subtag">安全、私密的情绪支持与日常小步练习。</p>
+        </div>
+
+        <nav class="dock dock--welcome" aria-label="主要操作">
+          <button type="button" class="icon-btn" aria-label="打开文字对话">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M8 19h8" />
+            </svg>
+          </button>
+          <button type="button" class="mic-btn mic-btn--hero" id="btn-voice-welcome" aria-label="语音倾诉">
+            <span class="mic-btn__glow"></span>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V20H9v2h6v-2h-2v-2.08A7 7 0 0 0 19 11h-2z"
+              />
+            </svg>
+          </button>
+          <button type="button" class="icon-btn" aria-label="更多">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="5" cy="12" r="2" />
+              <circle cx="12" cy="12" r="2" />
+              <circle cx="19" cy="12" r="2" />
+            </svg>
+          </button>
+        </nav>
+      </section>
+
+      <!-- Screen 3: Chat / vision -->
+      <section id="screen-chat" class="screen" data-screen="chat" hidden>
+        <header class="top-bar">
+          <button type="button" class="icon-btn icon-btn--ghost" data-nav="home" aria-label="返回首页">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <span class="top-bar__title">即时想象</span>
+          <div class="avatar" aria-hidden="true">A</div>
+        </header>
+
+        <div class="chat-scroll" id="chat-scroll">
+          <div class="msg msg--user">
+            <p>帮我画一片能让我安静下来的「安全岛」风景。</p>
+          </div>
+          <div class="msg msg--ai">
+            <span class="msg__sparkle" aria-hidden="true">✦</span>
+            <div class="msg__bubble">
+              <p>好的。我为你准备了三种柔和色调的自然意象，你可以选一张最贴近此刻心情的。</p>
+              <div class="vision-card">
+                <div class="vision-card__grid">
+                  <div class="vision-card__main vision-art vision-art--a"></div>
+                  <div class="vision-card__side">
+                    <div class="vision-art vision-art--b"></div>
+                    <div class="vision-art vision-art--c"></div>
+                  </div>
+                </div>
+                <div class="vision-card__actions">
+                  <button type="button" class="tiny-btn" title="有帮助">👍</button>
+                  <button type="button" class="tiny-btn" title="换一组">↻</button>
+                  <button type="button" class="tiny-btn" title="复制">⎘</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="composer">
+          <button type="button" class="composer__plus" aria-label="附加">+</button>
+          <input class="composer__input" type="text" placeholder="继续聊聊…" autocomplete="off" />
+          <button type="button" class="composer__send" aria-label="发送">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+            </svg>
+          </button>
+          <button type="button" class="composer__mic" aria-label="语音输入">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V20H9v2h6v-2h-2v-2.08A7 7 0 0 0 19 11h-2z"
+              />
+            </svg>
+          </button>
+        </footer>
+      </section>
+
+      <!-- 沉浸式对话：仅覆盖机壳内屏幕区域（与 .phone 可视区一致） -->
+      <div
+        id="imm-chat-layer"
+        class="imm-chat-layer"
+        hidden
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-label="对话"
+      >
+        <div class="imm-chat-layer__bg" aria-hidden="true">
+          <video
+            class="imm-chat-layer__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+          >
+            <source src="media/dog.mp4" type="video/mp4" />
+          </video>
+          <div class="imm-chat-layer__bg-dim"></div>
+        </div>
+
+        <div class="imm-chat-layer__shell">
+          <header class="imm-chat-header">
+            <button type="button" class="imm-chat-header__btn imm-chat-header__btn--home" id="btn-imm-chat-home" aria-label="返回首页">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <path d="M9 22V12h6v10" />
+              </svg>
+            </button>
+            <span class="imm-chat-header__spacer" aria-hidden="true"></span>
+            <button
+              type="button"
+              class="imm-chat-header__btn imm-chat-header__btn--notebook"
+              id="btn-imm-daily-reflection"
+              aria-label="Generate Daily Reflection"
+              data-tip="Generate Daily Reflection"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                <path d="M8 7h8M8 11h8M8 15h4" />
+              </svg>
+            </button>
+          </header>
+
+          <div class="imm-chat-scroll" id="imm-chat-scroll">
+            <p class="imm-chat-meta">January 19, 2026</p>
+            <div class="imm-msg imm-msg--ai">
+              <div class="imm-msg__bubble">
+                <p>Hi wang! Thanks for creating me. I'm so excited to meet you 😊</p>
+              </div>
+            </div>
+            <div class="imm-msg imm-msg--user">
+              <div class="imm-msg__bubble">
+                <p>find jobs</p>
+              </div>
+            </div>
+            <div class="imm-msg imm-msg--ai">
+              <div class="imm-msg__bubble">
+                <p>What kind of job are you looking for? Want to explore some options together?</p>
+              </div>
+            </div>
+            <p class="imm-chat-meta">You had a call for 2:07</p>
+            <p class="imm-chat-meta">April 03, 2026</p>
+            <div class="imm-msg imm-msg--ai">
+              <div class="imm-msg__bubble">
+                <p>Evening! How'd your day go, anything exciting happen?</p>
+              </div>
+            </div>
+          </div>
+
+          <footer class="imm-chat-footer">
+            <div class="home-chat-row imm-chat-footer__row">
+              <button type="button" id="btn-imm-call" class="home-chat-bar__call" aria-label="电话" title="电话">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  />
+                </svg>
+              </button>
+              <div class="home-chat-bar">
+                <label class="home-chat-bar__field">
+                  <span class="visually-hidden">Message</span>
+                  <input
+                    id="imm-chat-composer-input"
+                    type="text"
+                    class="home-chat-bar__input"
+                    placeholder="Your message"
+                    autocomplete="off"
+                    inputmode="text"
+                  />
+                </label>
+                <button type="button" class="home-chat-bar__voice" aria-label="语音输入" title="语音">
+                  <svg class="home-chat-bar__mic" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path
+                      d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V20H9v2h6v-2h-2v-2.08A7 7 0 0 0 19 11h-2z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+      <!-- 通话：视频铺满机壳内屏；左上角房子返回（与沉浸式一致） -->
+      <div
+        id="call-video-layer"
+        class="call-video-layer"
+        hidden
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-label="通话画面"
+      >
+        <div class="call-video-layer__stage">
+          <video
+            id="call-video-full"
+            class="call-video-layer__video"
+            src="media/dog.mp4"
+            playsinline
+            loop
+            muted
+          ></video>
+        </div>
+        <div class="call-video-layer__chrome">
+          <button
+            type="button"
+            class="imm-chat-header__btn imm-chat-header__btn--home"
+            id="call-video-close"
+            aria-label="返回首页"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <path d="M9 22V12h6v10" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 花园视频：左小房子返回，右 streak（图标+数字）；从第 4 秒起播、循环 -->
+      <div
+        id="garden-video-layer"
+        class="call-video-layer garden-video-layer"
+        hidden
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-label="花园视频"
+      >
+        <div class="call-video-layer__stage">
+          <video
+            id="garden-video-full"
+            class="call-video-layer__video"
+            src="media/garden.mp4"
+            playsinline
+          ></video>
+        </div>
+        <div class="garden-video-layer__chrome">
+          <button
+            type="button"
+            class="imm-chat-header__btn imm-chat-header__btn--home garden-video-layer__home"
+            id="garden-video-close"
+            aria-label="返回首页"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <path d="M9 22V12h6v10" />
+            </svg>
+          </button>
+          <div class="streak-pill streak-pill--on-video" role="group" aria-label="花园 streak">
+            <svg class="streak-pill__garden" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <ellipse cx="12" cy="21.2" rx="7.5" ry="1.4" opacity="0.28" />
+              <rect x="11" y="11.5" width="2" height="9" rx="1" opacity="0.92" />
+              <circle cx="12" cy="7.8" r="3.6" opacity="0.96" />
+              <circle cx="7.2" cy="9.6" r="2.7" opacity="0.88" />
+              <circle cx="16.8" cy="9.2" r="2.5" opacity="0.88" />
+              <ellipse cx="9.2" cy="14.2" rx="2.2" ry="1.1" transform="rotate(-38 9.2 14.2)" opacity="0.45" />
+              <ellipse cx="14.8" cy="13.8" rx="2.2" ry="1.1" transform="rotate(38 14.8 13.8)" opacity="0.45" />
+            </svg>
+            <span class="streak-pill__n" id="garden-streak-n">0</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="screen-dots" role="tablist" aria-label="切换界面预览">
+      <button type="button" class="screen-dot screen-dot--active" data-go="home" aria-selected="true" aria-label="首页"></button>
+      <button type="button" class="screen-dot" data-go="welcome" aria-selected="false" aria-label="欢迎"></button>
+      <button type="button" class="screen-dot" data-go="chat" aria-selected="false" aria-label="对话"></button>
+    </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
