@@ -300,13 +300,37 @@
   const btnCallClose = document.getElementById("call-video-close");
 
   const gardenLayer = document.getElementById("garden-video-layer");
-  const gardenHomeImage = document.getElementById("garden-home-image");
+  const gardenVideo = document.getElementById("garden-video-full");
   const btnHomeTab1 = document.getElementById("btn-home-tab-1");
   const btnHomeTab2 = document.getElementById("btn-home-tab-2");
   const btnHomeTabGarden = document.getElementById("btn-home-tab-garden");
   const btnHomeTabCourse = document.getElementById("btn-home-tab-course");
   const btnGardenClose = document.getElementById("garden-video-close");
   const gardenStreakN = document.getElementById("garden-streak-n");
+  const GARDEN_VIDEO_START_SEC = 4;
+
+  function playGardenVideoFromTrimStart() {
+    if (!gardenVideo) return;
+    const go = () => {
+      try {
+        gardenVideo.currentTime = GARDEN_VIDEO_START_SEC;
+      } catch (_) {}
+      gardenVideo.play().catch(() => {});
+    };
+    if (gardenVideo.readyState >= HTMLMediaElement.HAVE_METADATA) go();
+    else gardenVideo.addEventListener("loadedmetadata", go, { once: true });
+  }
+
+  if (gardenVideo && !gardenVideo.dataset.loopFromTrim) {
+    gardenVideo.dataset.loopFromTrim = "1";
+    gardenVideo.addEventListener("ended", () => {
+      if (!gardenLayer || gardenLayer.hidden) return;
+      try {
+        gardenVideo.currentTime = GARDEN_VIDEO_START_SEC;
+      } catch (_) {}
+      gardenVideo.play().catch(() => {});
+    });
+  }
 
   function bumpGardenStreak() {
     if (!gardenStreakN) return;
@@ -333,6 +357,7 @@
   function forceCloseGardenVideo() {
     if (!gardenLayer || gardenLayer.hidden) return;
     gardenLayer.classList.remove("call-video-layer--visible");
+    gardenVideo?.pause();
     gardenLayer.hidden = true;
     gardenLayer.setAttribute("aria-hidden", "true");
   }
@@ -345,33 +370,11 @@
     callLayer.setAttribute("aria-hidden", "false");
     if (heroVideo) heroVideo.pause();
     if (immLayer && immLayer.hidden === false && immVideo) immVideo.pause();
-
-    callVideo.muted = true;
-    callVideo.playsInline = true;
-    callVideo.loop = true;
-
-    const startPlayback = () => {
-      try {
-        callVideo.currentTime = 0;
-      } catch (_) {}
-      callVideo.play().catch(() => {});
-    };
-
-    if (callVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-      startPlayback();
-    } else {
-      callVideo.addEventListener("loadeddata", startPlayback, { once: true });
-      callVideo.addEventListener("canplay", startPlayback, { once: true });
-      try {
-        callVideo.load();
-      } catch (_) {}
-    }
-
+    callVideo.currentTime = 0;
+    callVideo.play().catch(() => {});
     void callLayer.offsetWidth;
     requestAnimationFrame(() => {
       callLayer.classList.add("call-video-layer--visible");
-      // Layer was display:none; nudge play again once visible
-      callVideo.play().catch(() => {});
     });
   }
 
@@ -407,7 +410,7 @@
   }
 
   function openGardenVideo() {
-    if (!gardenLayer || !gardenHomeImage || gardenLayer.hidden === false) return;
+    if (!gardenLayer || !gardenVideo || gardenLayer.hidden === false) return;
     forceCloseCallVideo();
     gardenLayer.classList.remove("call-video-layer--visible");
     bumpGardenStreak();
@@ -415,6 +418,7 @@
     gardenLayer.setAttribute("aria-hidden", "false");
     if (heroVideo) heroVideo.pause();
     if (immLayer && immLayer.hidden === false && immVideo) immVideo.pause();
+    playGardenVideoFromTrimStart();
     void gardenLayer.offsetWidth;
     requestAnimationFrame(() => {
       gardenLayer.classList.add("call-video-layer--visible");
@@ -422,8 +426,12 @@
   }
 
   function closeGardenVideo() {
-    if (!gardenLayer || gardenLayer.hidden) return;
+    if (!gardenLayer || !gardenVideo || gardenLayer.hidden) return;
+    if (document.fullscreenElement === gardenVideo) {
+      document.exitFullscreen?.().catch(() => {});
+    }
     gardenLayer.classList.remove("call-video-layer--visible");
+    gardenVideo.pause();
 
     let gDone = false;
     const gardenFinish = () => {

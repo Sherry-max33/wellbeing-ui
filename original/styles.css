@@ -2845,12 +2845,6 @@ button.avatar--home-btn:focus-visible {
   z-index: 45;
 }
 
-.garden-home-image {
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
 .garden-video-layer__chrome {
   position: absolute;
   top: 0;

@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Aldra · AI Well-being (U01 Home)</title>
+    <title>Aldra · AI Well-being</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-bg" aria-hidden="true"></div>
@@ -45,7 +45,7 @@
           </div>
 
           <header class="home-minimal__toolbar">
-            <button type="button" id="btn-toolbar-garden" class="streak-pill streak-pill--btn" aria-label="打开 Forest Home" title="Forest Home">
+            <button type="button" id="btn-toolbar-garden" class="streak-pill streak-pill--btn" aria-label="打开花园视频" title="花园视频">
               <svg class="streak-pill__garden" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <ellipse cx="12" cy="21.2" rx="7.5" ry="1.4" opacity="0.28" />
                 <rect x="11" y="11.5" width="2" height="9" rx="1" opacity="0.92" />
@@ -115,7 +115,7 @@
                 disablepictureinpicture
                 aria-label="小狗形象"
               >
-                <source src="./v2/ba0f6aaaab9a4121225c76b96151cd0b.mp4" type="video/mp4" />
+                <source src="media/dog.mp4" type="video/mp4" />
               </video>
             </div>
             <h1 class="home-minimal__welcome">Welcome, Sherry</h1>
@@ -164,7 +164,7 @@
                   />
                 </svg>
               </button>
-              <button type="button" class="home-tab" id="btn-home-tab-garden" aria-label="Forest Home" title="Forest Home">
+              <button type="button" class="home-tab" id="btn-home-tab-garden" aria-label="花园视频" title="花园视频">
                 <svg class="home-tab__garden" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <ellipse cx="12" cy="21.2" rx="7.5" ry="1.4" opacity="0.28" />
                   <rect x="11" y="11.5" width="2" height="9" rx="1" opacity="0.92" />
@@ -735,7 +735,7 @@
             playsinline
             disablepictureinpicture
           >
-            <source src="./v2/ba0f6aaaab9a4121225c76b96151cd0b.mp4" type="video/mp4" />
+            <source src="media/dog.mp4" type="video/mp4" />
           </video>
           <div class="imm-chat-layer__bg-dim"></div>
         </div>
@@ -838,15 +838,11 @@
           <video
             id="call-video-full"
             class="call-video-layer__video"
+            src="media/dog.mp4"
             playsinline
-            webkit-playsinline
             loop
             muted
-            preload="auto"
-            autoplay
-          >
-            <source src="./v2/ba0f6aaaab9a4121225c76b96151cd0b.mp4" type="video/mp4" />
-          </video>
+          ></video>
         </div>
         <div class="call-video-layer__chrome">
           <button
@@ -863,7 +859,7 @@
         </div>
       </div>
 
-      <!-- 花园 / Forest Home：静态图 U01_home；左小房子返回，右 streak -->
+      <!-- 花园视频：左小房子返回，右 streak（图标+数字）；从第 4 秒起播、循环 -->
       <div
         id="garden-video-layer"
         class="call-video-layer garden-video-layer"
@@ -871,15 +867,15 @@
         role="dialog"
         aria-modal="true"
         aria-hidden="true"
-        aria-label="Forest Home"
+        aria-label="花园视频"
       >
         <div class="call-video-layer__stage">
-          <img
-            id="garden-home-image"
-            class="call-video-layer__video garden-home-image"
-            src="./v2/garden-home.png"
-            alt="Forest Home"
-          />
+          <video
+            id="garden-video-full"
+            class="call-video-layer__video"
+            src="media/garden.mp4"
+            playsinline
+          ></video>
         </div>
         <div class="garden-video-layer__chrome">
           <button
@@ -911,9 +907,11 @@
 
     <div class="screen-dots" role="tablist" aria-label="切换界面预览">
       <button type="button" class="screen-dot screen-dot--active" data-go="home" aria-selected="true" aria-label="首页"></button>
+      <button type="button" class="screen-dot" data-go="welcome" aria-selected="false" aria-label="欢迎"></button>
+      <button type="button" class="screen-dot" data-go="chat" aria-selected="false" aria-label="对话"></button>
     </div>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

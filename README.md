@@ -16,4 +16,8 @@ Then open:
 http://localhost:8000
 ```
 
-You can also open `index.html` directly in a browser, but using a local server is recommended.
+## GitHub Pages
+
+Serve from the repository root (`index.html`). A `.nojekyll` file is included so assets deploy as-is.
+
+The previous demo is kept under `original/`. The working copy also remains in `v2/`.
